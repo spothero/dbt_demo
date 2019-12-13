@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: sfdc
+    tables:
+      - name: opportunity
+
+  - name: sh_public
+    tables:
+      - name: parking_spot
