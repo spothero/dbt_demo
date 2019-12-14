@@ -4,6 +4,35 @@ sources:
   - name: exchangerate
     tables:
       - name: forex
+        columns:
+          - name: exchange_date
+            description: Effective date for exchange rate
+          - name: eur_usd
+            description: Foreign Exchange Rate for EUR to USD 
+          - name: usd_jpy
+            description: Foreign Exchange Rate for USD to JPY
+          - name: usd_chf
+            description: Foreign Exchange Rate for USD to CHF
+          - name: gbp_usd
+            description: Foreign Exchange Rate for GBP to USD
+          - name: usd_cad
+            description: Foreign Exchange Rate for USD to CAD
+          - name: eur_gbp
+            description: Foreign Exchange Rate for EUR to GBP
+          - name: eur_jpy
+            description: Foreign Exchange Rate for EUR to JPY
+          - name: eur_chf
+            description: Foreign Exchange Rate for EUR to CHF
+          - name: aud_usd
+            description: Foreign Exchange Rate for AUD to USD
+          - name: gbp_jpy
+            description: Foreign Exchange Rate for GBP to JPY
+          - name: chf_jpy
+            description: Foreign Exchange Rate for CHF to JPY
+          - name: gbp_chf
+            description: Foreign Exchange Rate for GBP to CHF
+          - name: nzd_usd 
+            description: Foreign Exchange Rate for NZD to USD
       - name: forex_real
 
   - name: spothero_csv
