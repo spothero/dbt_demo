@@ -2,12 +2,12 @@
 
 This demo is meant to demonstrate [dbt's](https://docs.getdbt.com/docs) functionality for the following ETL tooling use cases:
 
-- Job dependency managment
+- Job dependency management
 - Table-level data lineage
 - Column-level documentation
 - Column-level testing functionality
 
-Regardless of if we adopt dbt within our stack, this work should clearly demonstrate the the value of this ETL functionality with a subset of existing Pipegen jobs.
+Regardless of whether or not we adopt dbt within our stack, this work should clearly demonstrate the the value of this ETL functionality with a subset of existing Pipegen jobs.
 
 To narrow the focus of this work, we are considering the [top 10 most-queried Pipegen tables](https://spothero.looker.com/explore/redshift_model/redshift_table_scans?qid=OJS3iUBsdwogNMaV8ARCkl&toggle=fil,pik) by the shared Looker Redshift user within the past week:
 
