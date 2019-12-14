@@ -1,28 +1,4 @@
-### Purpose of Demo
-
-This demo is meant to demonstrate [dbt's](https://docs.getdbt.com/docs) functionality for the following ETL tooling use cases:
-
-- Job dependency management
-- Table-level data lineage
-- Column-level documentation
-- Column-level testing functionality
-
-Regardless of whether or not we adopt dbt within our stack, this work should clearly demonstrate the the value of this ETL functionality with a subset of existing Pipegen jobs.
-
-To narrow the focus of this work, we are considering the [top 10 most-queried Pipegen tables](https://spothero.looker.com/explore/redshift_model/redshift_table_scans?qid=OJS3iUBsdwogNMaV8ARCkl&toggle=fil,pik) by the shared Looker Redshift user within the past week:
-
- - pipegen.pg_spot_microclimate
- - pipegen.pg_rentals
- - pipegen.pg_destination_microclimate
- - pipegen.pg_rental_facts
- - pipegen.pg_event_rate_rentals
- - pipegen.pg_currency_exchange_rate
- - pipegen.pg_parent_event
- - pipegen.pg_panda_spothero_event_mapping
- - pipegen.pg_rentals_past_eight_weeks
- - pipegen.pg_proxy_renter_ltv
-
-### Getting Set Up
+# Getting Set Up
 
 1. [Install](https://docs.getdbt.com/docs/macos) the dbt CLI using pip or homebrew
 
@@ -39,6 +15,8 @@ pip install dbt
 2. Clone this repo
 
 3. Configure your profile
+
+**Requirements:** Redshift user with write access to target schema(s). For the sake of running this demo, you can specifiy the same schema for dev & prod use cases within your config (below).
 
 > When you invoke dbt from the CLI, dbt parses your `dbt_project.yml` for the name of the profile to use to connect to your data warehouse.
 >
@@ -73,6 +51,99 @@ default:
 ```
 
 From the dbt repo directory, run `dbt debug` to test your Redshift credentials.
+
+# Demo
+
+## Purpose
+
+This demo is meant to demonstrate [dbt's](https://docs.getdbt.com/docs) functionality for the following ETL tooling use cases:
+
+- Job dependency management
+- Table-level data lineage
+- Column-level documentation
+- Column-level testing functionality
+
+Regardless of whether or not we adopt dbt within our stack, this work should clearly demonstrate the the value of this ETL functionality with a subset of existing Pipegen jobs.
+
+To narrow the focus of this work, we are considering the [top 10 most-queried Pipegen tables](https://spothero.looker.com/explore/redshift_model/redshift_table_scans?qid=OJS3iUBsdwogNMaV8ARCkl&toggle=fil,pik) by the shared Looker Redshift user within the past week:
+
+ - pipegen.pg_spot_microclimate
+ - pipegen.pg_rentals
+ - pipegen.pg_destination_microclimate
+ - pipegen.pg_rental_facts
+ - pipegen.pg_event_rate_rentals
+ - pipegen.pg_currency_exchange_rate
+ - pipegen.pg_parent_event
+ - pipegen.pg_panda_spothero_event_mapping
+ - pipegen.pg_rentals_past_eight_weeks
+ - pipegen.pg_proxy_renter_ltv
+ 
+## Functionality
+
+### Job dependency management
+
+Leveraging `{{ ref('<model_name>') }}` within interdependent SQL queries in the `/models` directory automatically informs the order & scope of job(s) to be executed and the DAG is dynamically built based on arguments passed in the `dbt run` command. ([See docs](https://docs.getdbt.com/docs/model-selection-syntax#section-model-selection-syntax)) 
+
+#### Demo: Job dependency management
+
+> By default, `dbt run` will execute all of the models in the dependency graph. During development (and deployment), it is useful to specify only a subset of models to run. Use the `--models` flag with dbt run to select a subset of models to run. 
+
+Outcome of `dbt run` - everything runs, regardless of dependencies:
+
+```
+19:54:51 | Concurrency: 1 threads (target='dev')
+19:54:51 | 
+19:54:51 | 1 of 11 START view model maggiehays.pg_currency_exchange_rate........ [RUN]
+19:54:59 | 1 of 11 OK created view model maggiehays.pg_currency_exchange_rate... [CREATE VIEW in 8.35s]
+19:54:59 | 2 of 11 START view model maggiehays.pg_transaction_fee_summary_gmv... [RUN]
+19:55:07 | 2 of 11 OK created view model maggiehays.pg_transaction_fee_summary_gmv [CREATE VIEW in 8.20s]
+19:55:07 | 3 of 11 START view model maggiehays.pg_parent_event.................. [RUN]
+19:55:16 | 3 of 11 OK created view model maggiehays.pg_parent_event............. [CREATE VIEW in 8.74s]
+19:55:16 | 4 of 11 START view model maggiehays.pg_destination_microclimate...... [RUN]
+19:55:21 | 4 of 11 OK created view model maggiehays.pg_destination_microclimate. [CREATE VIEW in 4.59s]
+19:55:21 | 5 of 11 START view model maggiehays.pg_rentals_past_eight_weeks...... [RUN]
+19:55:27 | 5 of 11 OK created view model maggiehays.pg_rentals_past_eight_weeks. [CREATE VIEW in 6.37s]
+19:55:27 | 6 of 11 START view model maggiehays.pg_spot_microclimate............. [RUN]
+19:55:33 | 6 of 11 OK created view model maggiehays.pg_spot_microclimate........ [CREATE VIEW in 4.80s]
+19:55:33 | 7 of 11 START view model maggiehays.pg_rentals....................... [RUN]
+19:55:42 | 7 of 11 OK created view model maggiehays.pg_rentals.................. [CREATE VIEW in 8.84s]
+19:55:42 | 8 of 11 START view model maggiehays.pg_panda_spothero_event_mapping.. [RUN]
+19:55:51 | 8 of 11 OK created view model maggiehays.pg_panda_spothero_event_mapping [CREATE VIEW in 9.42s]
+19:55:51 | 9 of 11 START view model maggiehays.pg_event_rate_rentals............ [RUN]
+19:56:20 | 9 of 11 OK created view model maggiehays.pg_event_rate_rentals....... [CREATE VIEW in 28.66s]
+19:56:20 | 10 of 11 START view model maggiehays.pg_proxy_renter_ltv............. [RUN]
+19:56:28 | 10 of 11 OK created view model maggiehays.pg_proxy_renter_ltv........ [CREATE VIEW in 7.47s]
+19:56:28 | 11 of 11 START view model maggiehays.pg_rental_facts................. [RUN]
+19:56:33 | 11 of 11 OK created view model maggiehays.pg_rental_facts............ [CREATE VIEW in 5.35s]
+19:56:33 | 
+19:56:33 | Finished running 11 view models in 105.70s.
+Completed successfully
+```
+
+Outcome of `dbt run --models +pg_rental_facts+` to only build upstream and downstream jobs:
+
+```
+19:43:48 | Concurrency: 1 threads (target='dev')
+19:43:48 | 
+19:43:48 | 1 of 4 START view model maggiehays.pg_currency_exchange_rate......... [RUN]
+19:43:56 | 1 of 4 OK created view model maggiehays.pg_currency_exchange_rate.... [CREATE VIEW in 7.81s]
+19:43:56 | 2 of 4 START view model maggiehays.pg_transaction_fee_summary_gmv.... [RUN]
+19:44:01 | 2 of 4 OK created view model maggiehays.pg_transaction_fee_summary_gmv [CREATE VIEW in 4.88s]
+19:44:01 | 3 of 4 START view model maggiehays.pg_rentals........................ [RUN]
+19:44:08 | 3 of 4 OK created view model maggiehays.pg_rentals................... [CREATE VIEW in 6.50s]
+19:44:08 | 4 of 4 START view model maggiehays.pg_rental_facts................... [RUN]
+19:44:13 | 4 of 4 OK created view model maggiehays.pg_rental_facts.............. [CREATE VIEW in 4.95s]
+19:44:13 | 
+19:44:13 | Finished running 4 view models in 29.22s.
+```
+
+
+### Table-level data lineage
+
+### Column-level documentation
+
+### Column-level testing functionality
+
 
 ### Notes/Observations
 
