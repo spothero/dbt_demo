@@ -22,7 +22,6 @@ To narrow the focus of this work, we are considering the [top 10 most-queried Pi
  - pipegen.pg_rentals_past_eight_weeks
  - pipegen.pg_proxy_renter_ltv
 
-
 ### Getting Set Up
 
 1. [Install](https://docs.getdbt.com/docs/macos) the dbt CLI using pip or homebrew
@@ -74,3 +73,30 @@ default:
 ```
 
 From the dbt repo directory, run `dbt debug` to test your Redshift credentials.
+
+### Notes/Observations
+
+- We can't use `{{ ref() }}` syntax when jobs are self-referential, so this might require some refactoring of existing Pipegen jobs.. For example, in `pg_rental_facts.sql`, the first CTE references itself:
+
+```sql
+-- Logic to build `pipegen.pg_rental_facts` 
+
+WITH renter_latest_valid_facts AS (
+SELECT
+  rental.renter_id,
+  rental.star_rating AS latest_star_rating,
+  rental.city AS latest_city,
+  rental.rental_device_segment AS latest_device_segment,
+  rental.rental_segment_rollup AS latest_segment,
+  rental.stripe_card_type AS latest_stripe_card_type,
+  rental.profile_type AS latest_profile_type,
+  rental.neighborhood AS latest_neighborhood,
+  rental.rental_created AS latest_rental_created,
+  DATEDIFF(day, rental.rental_created, CURRENT_DATE) AS latest_days_since,
+  parking_spot.title AS latest_parking_spot
+-- self-referential query; cannot use {{ ref('pg_rental_facts') }}
+FROM pipegen.pg_rental_facts AS rental 
+...
+```
+
+This is likely a solid use-case to have a stand-alone `renter_latest_valid_facts.sql` ephemeral materialization; in the meantime, self-referential queries will not use {{ ref() }}
