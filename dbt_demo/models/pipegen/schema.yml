@@ -35,9 +35,24 @@ sources:
             description: Foreign Exchange Rate for NZD to USD
       - name: forex_real
 
+  - name: core
+    tables:
+      - name: logs_facility_status
+
   - name: spothero_csv
     tables:
       - name: date_series
+      - name: daphne_fake_budget_test_11_21_2019
+
+  - name: daphne_public
+    tables:
+      - name: parking_transactions
+      - name: facility
+      - name: occupancy_hourly
+
+  - name: event
+    tables:
+      - name: sg_event_impact
 
   - name: parkingpanda_dbo
     tables:
@@ -47,6 +62,13 @@ sources:
   - name: sfdc
     tables:
       - name: opportunity
+      - name: account
+      - name: contact
+      - name: user
+      - name: reporting_neighborhood_c
+      - name: reporting_city_c
+      - name: market_c
+      - name: supply_task_c
 
   - name: sh_public
     tables:
