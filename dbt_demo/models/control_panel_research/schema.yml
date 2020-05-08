@@ -1,0 +1,376 @@
+version: 2
+
+sources:
+  - name: exchangerate
+    tables:
+      - name: forex
+        columns:
+          - name: exchange_date
+            description: Effective date for exchange rate
+          - name: eur_usd
+            description: Foreign Exchange Rate for EUR to USD 
+          - name: usd_jpy
+            description: Foreign Exchange Rate for USD to JPY
+          - name: usd_chf
+            description: Foreign Exchange Rate for USD to CHF
+          - name: gbp_usd
+            description: Foreign Exchange Rate for GBP to USD
+          - name: usd_cad
+            description: Foreign Exchange Rate for USD to CAD
+          - name: eur_gbp
+            description: Foreign Exchange Rate for EUR to GBP
+          - name: eur_jpy
+            description: Foreign Exchange Rate for EUR to JPY
+          - name: eur_chf
+            description: Foreign Exchange Rate for EUR to CHF
+          - name: aud_usd
+            description: Foreign Exchange Rate for AUD to USD
+          - name: gbp_jpy
+            description: Foreign Exchange Rate for GBP to JPY
+          - name: chf_jpy
+            description: Foreign Exchange Rate for CHF to JPY
+          - name: gbp_chf
+            description: Foreign Exchange Rate for GBP to CHF
+          - name: nzd_usd 
+            description: Foreign Exchange Rate for NZD to USD
+      - name: forex_real
+
+  - name: core
+    tables:
+      - name: logs_facility_status
+
+  - name: controlpanel_public
+    tables:
+      - name: line_item
+
+  - name: spothero_csv
+    tables:
+      - name: date_series
+      - name: daphne_fake_budget_test_11_21_2019
+
+  - name: daphne_public
+    tables:
+      - name: parking_transactions
+      - name: facility
+      - name: occupancy_hourly
+
+  - name: event
+    tables:
+      - name: sg_event_impact
+
+  - name: parkingpanda_dbo
+    tables:
+      - name: seo_event
+      - name: seo
+
+  - name: sfdc
+    tables:
+      - name: opportunity
+      - name: account
+      - name: contact
+      - name: user
+      - name: reporting_neighborhood_c
+      - name: reporting_city_c
+      - name: market_c
+      - name: supply_task_c
+      - name: case
+      - name: hero_tag_c
+
+  - name: sh_public
+    tables:
+      - name: accounts_posting
+      - name: adjustment_transaction
+      - name: affiliate
+      - name: affiliate_exclusion
+      - name: affiliate_members
+      - name: affiliate_rental
+      - name: airport
+      - name: airport_shuttle_hours
+      - name: api_appversion
+      - name: api_key
+      - name: api_mobileconfig
+      - name: api_platform
+      - name: appsflyer_appsflyerevent
+      - name: archive_rental_order_20190614
+      - name: atom_feed
+      - name: auth_group
+      - name: auth_group_permissions
+      - name: auth_permission
+      - name: auth_user
+      - name: auth_user_groups
+      - name: authtoken_token
+      - name: auto_emails_emailhistory
+      - name: auto_emails_emailtemplate
+      - name: auto_emails_unsubscribedlist
+      - name: business_account
+      - name: business_integration
+      - name: business_invitation
+      - name: business_preferences
+      - name: business_profilerole
+      - name: business_reselleragreement
+      - name: business_reservationhistory
+      - name: business_role
+      - name: business_selfenrollment
+      - name: company
+      - name: company_employees
+      - name: company_note
+      - name: constance_config
+      - name: credit_reason
+      - name: data_export_exportjob
+      - name: data_export_exportspotaccounting
+      - name: destination
+      - name: destination_airport
+      - name: destination_categories
+      - name: destination_deep_link
+      - name: destination_event_types
+      - name: django_content_type
+      - name: django_migrations
+      - name: django_redirect
+      - name: django_session
+      - name: django_site
+      - name: djcelery_crontabschedule
+      - name: djcelery_intervalschedule
+      - name: djstripe_balancetransaction
+      - name: djstripe_card
+      - name: djstripe_charge
+      - name: djstripe_commuteraddress
+      - name: djstripe_commuteradministrator
+      - name: djstripe_commutercardinfo
+      - name: djstripe_customer
+      - name: djstripe_dispute
+      - name: djstripe_disputeevidence
+      - name: djstripe_disputeevidencedetails
+      - name: djstripe_refund
+      - name: email_attachment
+      - name: email_description
+      - name: email_tracking
+      - name: event
+      - name: event_event_types
+      - name: event_rental_rule
+      - name: event_rental_rule_tier
+      - name: expense_provider
+      - name: extole_event
+      - name: extole_referral
+      - name: facility_airport
+      - name: facility_attributes
+      - name: facility_config
+      - name: facility_fee
+      - name: facility_fee_join
+      - name: feature_flags_featureflag
+      - name: fee
+      - name: fivetran_audit
+      - name: grayout
+      - name: integrations_datapark
+      - name: integrations_scheidt_bachmann
+      - name: laz_availability_exception
+      - name: laz_location
+      - name: laz_location_product
+      - name: laz_product_schedule
+      - name: laz_rental_history
+      - name: laz_timed_rate
+      - name: laz_update_history
+      - name: license_plates
+      - name: manual_adjustment
+      - name: monthly_rental_rule
+      - name: multirate_cache_command
+      - name: note_category
+      - name: oauth2_accesstoken
+      - name: oauth2_client
+      - name: oauth2_refreshtoken
+      - name: oversized_dimension_fee
+      - name: oversized_fee
+      - name: panda_transaction
+      - name: parking_spot
+      - name: parking_spot_abbreviated_redemption_instructions
+      - name: parking_spot_instructions
+      - name: parking_spot_note
+      - name: parking_spot_prepaid
+      - name: parking_spot_users_who_get_rental_summary
+      - name: partner
+      - name: partner_exclusion
+      - name: partner_rate_limit
+      - name: partner_rental
+      - name: partner_rental_cancellation
+      - name: partner_renter_card
+      - name: partner_transaction
+      - name: payment_history
+      - name: promocodes_marketingcampaign
+      - name: promocodes_marketingcampaigngroup
+      - name: promocodes_marketingorganization
+      - name: promocodes_promocode
+      - name: promocodes_promocodebatch
+      - name: promocodes_promocodehistory
+      - name: promocodes_promocoderedemption
+      - name: promocodes_promocoderedemptionfailure
+      - name: push_notifications_apnsdevice
+      - name: push_notifications_gcmdevice
+      - name: ratings_airportratingrule
+      - name: ratings_amenities
+      - name: ratings_hourlylockedratingrule
+      - name: ratings_hourlyvariableratingrule
+      - name: ratings_ratingchangehistory
+      - name: ratings_ratingerror
+      - name: ratings_ratingrule
+      - name: ratings_ratingruleconfig
+      - name: ratings_ratingrulegroup
+      - name: ratings_ratingrulegroupairportsettings
+      - name: ratings_ratingsample
+      - name: receipt_access_key
+      - name: referer_redirect
+      - name: referrals_referral
+      - name: referrals_referrallinkopened
+      - name: referrals_referralmessage
+      - name: referrals_referralmessage_emails
+      - name: referrals_referredemail
+      - name: registration_registrationprofile
+      - name: remit_scheme
+      - name: rental
+      - name: rental_contract
+      - name: rental_history
+      - name: rental_notification_event
+      - name: rental_order
+      - name: rental_recurrence
+      - name: rental_recurrence_cancellation
+      - name: rental_registered_wallet_devices
+      - name: rental_terms_and_conditions_accepted
+      - name: rental_tracking
+      - name: rental_vehicle
+      - name: reversion_revision
+      - name: reversion_version
+      - name: reviews_reviewcategory
+      - name: reviews_reviewcommentkeyword
+      - name: reviews_reviewresponse
+      - name: reviews_reviewresponse_categories
+      - name: reviews_reviewresponse_seen_categories
+      - name: reviews_reviewresponseedit
+      - name: reviews_reviewresponseedit_categories
+      - name: robustredirects_redirect
+      - name: roles_permission
+      - name: roles_role
+      - name: roles_role_permissions
+      - name: shortener_link
+      - name: sitemap_customsitemapurl
+      - name: sms_reminder
+      - name: social_auth_usersocialauth
+      - name: south_migrationhistory
+      - name: spot_admin
+      - name: spot_blackout
+      - name: spot_blackout_admin
+      - name: spothero_applewalletdevices
+      - name: spothero_applewalletpass
+      - name: spothero_blacklistdomain
+      - name: spothero_blockedcreditcard
+      - name: spothero_cancellationreason
+      - name: spothero_cancellationreasoncategory
+      - name: spothero_city
+      - name: spothero_city_account_managers
+      - name: spothero_clientinfo
+      - name: spothero_cloudimage
+      - name: spothero_company_user_connection
+      - name: spothero_creditabusefingerprintwhitelist
+      - name: spothero_creditabusewhitelist
+      - name: spothero_credithistory
+      - name: spothero_destinationcategory
+      - name: spothero_displayhours
+      - name: spothero_eventtype
+      - name: spothero_experiment_log
+      - name: spothero_experiment_log_rentals
+      - name: spothero_facilityrestriction
+      - name: spothero_fraudattempt
+      - name: spothero_googleanalyticsclientinfo
+      - name: spothero_googleplaces
+      - name: spothero_homepage
+      - name: spothero_hours
+      - name: spothero_inventoryavailabilitystatus
+      - name: spothero_ios9universallink
+      - name: spothero_job
+      - name: spothero_monthlywaitlist
+      - name: spothero_oversizevehicletype
+      - name: spothero_parkingspotuserobjectpermission
+      - name: spothero_pendingcancellation
+      - name: spothero_profile
+      - name: spothero_redemptioninstruction
+      - name: spothero_redemptioninstructioncategory
+      - name: spothero_redemptioninstructionforfacility
+      - name: spothero_redemptioninstructionillustration
+      - name: spothero_referralsource
+      - name: spothero_rentalbulkpurchased
+      - name: spothero_rentalsegment
+      - name: spothero_reservation_breakdown
+      - name: spothero_reservationsubscription
+      - name: spothero_s3asset
+      - name: spothero_schema_revision_history
+      - name: spothero_soldouthistory
+      - name: spothero_spotaddress
+      - name: spothero_team
+      - name: spothero_teammember
+      - name: spothero_teammember_teams
+      - name: spothero_teammemberquestion
+      - name: spothero_teammembersocial
+      - name: spothero_testimonial
+      - name: spothero_testimonialsource
+      - name: spothero_transientinventoryrule
+      - name: spothero_typeform
+      - name: spothero_user
+      - name: spothero_user_favorite_facilities
+      - name: spothero_user_groups
+      - name: spothero_user_user_permissions
+      - name: spothero_usertracking
+      - name: static_rental_rule
+      - name: taggit_tag
+      - name: taggit_taggeditem
+      - name: tax
+      - name: tax_adjustment
+      - name: tax_adjustment_transaction
+      - name: tax_group
+      - name: tax_net_revenue
+      - name: tax_remit_structure
+      - name: tax_rental_entry
+      - name: tax_rule
+      - name: tax_schema
+      - name: tax_schema_version
+      - name: tax_summary
+      - name: tax_taxremitstrategy
+      - name: tax_transaction
+      - name: tiered_event_rate
+      - name: tiered_event_rate_key
+      - name: tiered_event_rate_tier
+      - name: timezone
+      - name: transaction
+      - name: transaction_item
+      - name: transaction_remit_item
+      - name: user_device
+      - name: user_vehicles
+      - name: vehicle_body
+      - name: vehicle_info
+      - name: vehicle_restriction
+      
+models:
+  - name: portfolio_facility_data
+    description: '{{ doc("portfolio_facility_data") }}'
+  - name: facility_month_to_date
+    description: '{{ doc("facility_month_to_date") }}'
+  - name: remit_and_rentals_wow
+    description: '{{ doc("remit_and_rentals_wow") }}'
+  - name: facility_mtd_report
+    description: '{{ doc("facility_mtd_report") }}'
+  - name: pg_spot_microclimate
+    description: A table assigning distance between two parking spot locations
+    columns:
+        - name: origin_parking_spot_id
+          description: ""
+          tests:
+              - unique
+              - not_null
+        - name: comp_parking_spot_id
+          description: "" 
+          tests:
+              - not_null
+        - name: comp_opportunity_id
+          description: ""
+        - name: origin_location_lat
+          description: ""
+        - name: origin_location_lon
+          description: ""
+        - name: distance_miles
+          description: ""
